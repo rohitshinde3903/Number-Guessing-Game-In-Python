@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Guess the Number!</h1>
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+        <form action="/" method="post" id="guess-form">
+            <input type="number" name="guess" id="guess-input" placeholder="Enter your guess" required {% if retain_focus %}autofocus{% endif %}>
+            <button type="submit">Guess</button>
+        </form>
+        <a href="/reset">Reset Game</a>
+        <div class="guessed-numbers">
+            <h2>Guessed Numbers</h2>
+            <ul>
+                {% for number in guessed_numbers %}
+                <li>{{ number }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if result %}
+        <div class="result">
+            <h2>Game Result</h2>
+            <p>Correct guess! You guessed it in {{ counter }} attempts.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
